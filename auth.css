@@ -1,0 +1,68 @@
+/* auth.css - register, profile setup, login */
+body.auth{background:var(--color-surface)}
+.auth-top{display:flex;justify-content:flex-end;padding:22px var(--page-padding);background:var(--color-accent);border-bottom:2px solid var(--color-border)}
+.auth-top a{padding:.5rem 1.1rem;border:var(--border);border-radius:var(--radius);background:var(--color-card);font-size:.85rem;color:var(--color-heading);text-decoration:none}
+.auth-box{max-width:520px;margin:0 auto;padding:26px 1rem 50px;text-align:center}
+.auth-box h1{font-size:2.6rem;font-weight:var(--weight-bold)}
+.auth-box .tag{margin:6px 0 20px;font-size:.95rem}
+.oauth{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.oauth button,.auth-btn{padding:.6rem 1.4rem;border:var(--border);border-radius:var(--radius);background:var(--color-accent);font:inherit;font-size:.85rem;font-weight:var(--weight-bold);color:var(--color-heading);cursor:pointer}
+.auth-btn{margin-top:18px;background:var(--color-card);min-width:150px}
+.or{display:flex;align-items:center;gap:12px;margin:16px 0;font-size:.8rem}.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--color-heading)}
+.auth-box input[type=text],.auth-box input[type=email],.auth-box input[type=password]{display:block;width:100%;margin-bottom:12px;padding:.7rem 1rem;border:var(--border);border-radius:var(--radius);background:var(--color-accent);font:inherit;font-size:.9rem;color:var(--color-heading)}
+.auth-box input::placeholder{color:var(--color-heading);opacity:.65}
+.auth-msg{min-height:1.2em;margin:4px 0 0;font-size:.82rem;color:var(--color-error)}
+.auth-msg.ok{color:var(--color-text)}
+.auth-box h2{margin:16px 0 8px;font-size:.9rem;font-weight:var(--weight-regular);text-align:left}
+.photo-row{display:flex;align-items:center;gap:14px}
+.avatars{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.av{position:relative;width:54px;height:54px;padding:0;border:2px solid var(--color-border);border-radius:50%;overflow:hidden;background:none;cursor:pointer}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.on{outline:3px solid var(--color-highlight)}
+.av.on::after{content:"";position:absolute;right:0;bottom:0;width:18px;height:18px;background:url(../assets/icons/yellow-check.png) center/contain no-repeat}
+.me-photo{width:72px;height:72px;border:2px solid var(--color-border);border-radius:50%;object-fit:cover}
+.forgot{display:block;margin-top:6px;text-align:right;font-size:.8rem;color:var(--color-text)}
+
+/* ---------- Create an account page (register.html) - follows the mockup ---------- */
+body[data-page="register"]{background:var(--color-page)}
+body[data-page="register"] .auth-top{padding:40px var(--page-padding) 39px;background:var(--color-surface);border-bottom:0}
+body[data-page="register"] .auth-top a{display:block;height:46px;padding:0 .5rem;line-height:42px;font-size:.85rem;color:var(--color-heading)}
+body[data-page="register"] .auth-box{width:100%;max-width:658px;padding:8px 16px 60px}
+body[data-page="register"] .auth-box h1{font-size:3.85rem}
+body[data-page="register"] .auth-box .tag{margin:7px 0 34px;font-size:var(--size-body);color:var(--color-text)}
+body[data-page="register"] .oauth{gap:52px}
+body[data-page="register"] .oauth button{min-width:198px;height:58px;padding:0 .4rem;font-size:1.28rem;color:var(--color-text)}
+body[data-page="register"] .or{gap:8px;margin:29px 0 20px;font-size:var(--size-btn);font-weight:var(--weight-bold);color:var(--color-text);opacity:.8}
+body[data-page="register"] .or::before,body[data-page="register"] .or::after{border-top-color:var(--color-text)}
+body[data-page="register"] .auth-box input[type=text],body[data-page="register"] .auth-box input[type=email],body[data-page="register"] .auth-box input[type=password]{height:58px;margin-bottom:19px;padding:0 25px;font-size:1.28rem}
+body[data-page="register"] .auth-box input::placeholder{color:var(--color-text);opacity:.9}
+body[data-page="register"] .auth-msg{margin:0 0 4px;font-size:.9rem}
+body[data-page="register"] .auth-msg:empty{display:none}
+body[data-page="register"] .auth-btn{display:block;min-width:238px;height:62px;margin:25px auto 0;padding:0 2rem;font-size:var(--size-btn);color:var(--color-text)}
+
+/* ---------- Set up your profile page (profile-setup.html) - follows the mockup ---------- */
+body[data-page="profile-setup"]{background:var(--color-page)}
+body[data-page="profile-setup"] .auth-top{align-items:center;justify-content:flex-start;height:125px;padding:11px var(--page-padding) 0;background:var(--color-surface);border-bottom:0}
+body[data-page="profile-setup"] .auth-top a.auth-logo{padding:0;border:0;border-radius:0;background:none;font-size:2.7rem;font-weight:var(--weight-bold);line-height:1;color:var(--color-heading);text-decoration:none}
+body[data-page="profile-setup"] .auth-box{width:100%;max-width:1009px;padding:22px 16px 60px;text-align:left}
+body[data-page="profile-setup"] .auth-box h1{font-size:2.67rem;font-weight:var(--weight-bold);color:var(--color-text)}
+body[data-page="profile-setup"] .auth-box h2{margin:0 0 12px;font-size:1.28rem;line-height:1.1;color:var(--color-text)}
+body[data-page="profile-setup"] form h2:first-of-type{margin-top:12px;margin-bottom:13px}
+body[data-page="profile-setup"] .auth-box input#username{height:58px;margin-bottom:45px;padding:0 20px;font-size:1.28rem}
+body[data-page="profile-setup"] .auth-box input::placeholder{color:var(--color-text);opacity:.9}
+body[data-page="profile-setup"] .photo-row{gap:15px;margin-bottom:25px}
+body[data-page="profile-setup"] .me-photo{width:124px;height:124px;border-color:var(--color-heading)}
+body[data-page="profile-setup"] #photo{position:relative;top:6px;width:166px;overflow:hidden;color:transparent;font-size:.85rem;cursor:pointer}
+body[data-page="profile-setup"] #photo::file-selector-button{width:166px;height:37px;margin:0;padding:0;border:2px solid var(--color-heading);border-radius:10px;background:var(--color-card);font:inherit;font-size:.85rem;color:var(--color-text);cursor:pointer}
+body[data-page="profile-setup"] .avatars{justify-content:flex-start;gap:41px;margin-top:0;padding-left:21px}
+body[data-page="profile-setup"] .avatars+.auth-msg{margin-top:12px}
+body[data-page="profile-setup"] .av{width:107px;height:107px;overflow:visible;border-color:var(--color-heading)}
+body[data-page="profile-setup"] .av img{border-radius:50%}
+body[data-page="profile-setup"] .av.on{outline:0;border:3px solid var(--color-highlight)}
+/* yellow badge with a white tick, sitting on the bottom-right edge of the chosen avatar */
+body[data-page="profile-setup"] .av.on::after{right:-3px;bottom:-3px;width:29px;height:29px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23ffd803'/%3E%3Cpath d='M9 16.5l5 5L23 11' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+body[data-page="profile-setup"] .auth-msg{margin:0 0 4px;font-size:.9rem;text-align:center}
+body[data-page="profile-setup"] .auth-msg:empty{display:none}
+body[data-page="profile-setup"] .auth-btn{display:block;min-width:238px;height:62px;margin:21px auto 0;padding:0 2rem;font-size:var(--size-btn);color:var(--color-text)}
+/* the logo also shows when the header is empty (older profile-setup.html), so it is never missing */
+body[data-page="profile-setup"] .auth-top:empty::before{content:"Axia";font-size:2.7rem;font-weight:var(--weight-bold);line-height:1;color:var(--color-heading)}

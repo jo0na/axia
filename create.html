@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guest Home | Axia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/builder.css">
+  <style>
+    /* Guest Create page only (this style block lives inside create.html, so no other page is affected) */
+    /* 1) the + under each tile: same bold outlined plus as the logged-in page, yellow when the cursor is on the tile */
+    body[data-page="guest"] .tile .plus{width:26px;height:24px;margin:2px auto 6.8px;padding:0;overflow:hidden;white-space:nowrap;text-indent:-999px;line-height:0;color:transparent;-webkit-text-stroke:0;font-size:0;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpolygon points='9,1 17,1 17,9 25,9 25,17 17,17 17,25 9,25 9,17 1,17 1,9 9,9' fill='%23fffffe' stroke='%23272343' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")}
+    body[data-page="guest"] .tile:hover .plus,body[data-page="guest"] .plus:focus-visible{color:transparent;-webkit-text-stroke:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpolygon points='9,1 17,1 17,9 25,9 25,17 17,17 17,25 9,25 9,17 1,17 1,9 9,9' fill='%23ffd803' stroke='%23272343' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")}
+    /* 2) names above the tiles (Letter, Photo, ...): only while the cursor is on that tile.
+          The name is the <div> inside each .tile (the other two items are buttons), so no class name is needed. */
+    body[data-page="guest"] .tile > div{opacity:0 !important;transition:opacity .15s}
+    body[data-page="guest"] .tile:hover > div,
+    body[data-page="guest"] .tile:focus-within > div{opacity:1 !important}
+    @media(hover:none){body[data-page="guest"] .tile > div{opacity:1 !important}}
+  </style>
+</head>
+<body class="workspace" data-page="guest" data-root="../">
+  <header class="ws-top">
+    <span class="pill">Guest Home</span>
+    <p class="ws-prompt">Want to make your experience personal? <a href="register.html">Register Here</a> or <a href="login.html">Log In</a> &gt;</p>
+  </header>
+  <main class="ws">
+    <!-- Your Invoice / Package Summary (updates as items are added) -->
+    <aside class="invoice" aria-label="Package summary">
+      <h2>Your invoice <span>Package Summary</span></h2>
+      <div class="inv-row">
+        <div><label for="f-to">For</label><input id="f-to" placeholder="Recipient Name" maxlength="40"></div>
+        <div><label for="f-by">Created by</label><input id="f-by" placeholder="Optional Name" maxlength="40"></div>
+      </div>
+      <label for="f-title" style="margin-top:14px">Title</label>
+      <input class="line" id="f-title" maxlength="80">
+      <div class="inv-head"><span>Description</span><span>Quantity</span></div>
+      <ul class="inv-list" id="inv-list"></ul>
+      <div class="inv-sum" id="inv-sum"></div>
+      <div class="inv-actions">
+        <button class="bt" id="btn-review" type="button">Review Package</button>
+        <button class="bt" id="btn-seal" type="button">Finish and Seal</button>
+        <button class="link-btn" id="inv-clear" type="button" hidden>Remove all items</button>
+      </div>
+      <p class="inv-note" id="inv-note"></p>
+    </aside>
+    <section class="stage" id="stage" aria-live="polite"></section>
+  </main>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/builder.js"></script>
+</body>
+</html>
