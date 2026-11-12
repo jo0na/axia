@@ -1,0 +1,401 @@
+/* =========================================================
+   info.css  -  styles for the three public information pages
+     how-it-works.html   ·   help.html   ·   about.html
+   Sizes and positions were measured from mockups 48, 49 and 50.
+   ========================================================= */
+
+/* ---------- SHARED: page title + subtitle ---------- */
+.page-title {
+  padding-top: 40px;
+  font-size: var(--size-h2);       /* 64px */
+}
+
+.page-lead {
+  margin-top: 50px;
+  text-align: center;              /* 19px subtitle under the title */
+}
+
+/* =========================================================
+   1. HOW IT WORKS
+   ========================================================= */
+.steps-page {
+  /* screen height - navbar - bottom band: so the band sits at the bottom */
+  min-height: calc(100vh - var(--header-height) - var(--band-height));
+  padding: 0 var(--page-padding) 40px;
+}
+
+.steps-page .page-lead {
+  margin-bottom: 63px;
+}
+
+/* five cards in one row */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 41px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.step-card {
+  display: grid;
+  grid-template-rows: 1fr 1fr;     /* top half = title, bottom half = text */
+  min-height: 271px;
+  padding: 0;
+  border: var(--border);
+  border-radius: 20px;
+  background: var(--color-card);
+  text-align: center;
+}
+
+.step-card h2 {
+  font-size: var(--size-nav);      /* ~21px */
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-text);
+  align-self: end;                 /* title sits at the bottom of the top half */
+  padding-bottom: 24px;
+}
+
+.step-card p {
+  align-self: start;               /* text starts at the top of the bottom half */
+  padding: 14px 6px 0;
+  font-size: 0.89rem;              /* ~14px */
+  line-height: 1;
+}
+
+/* =========================================================
+   2. HELP
+   ========================================================= */
+.help-page {
+  min-height: calc(100vh - var(--header-height) - var(--band-height));
+  padding: 0 var(--page-padding) 20px;
+}
+
+.help-page .page-lead {
+  margin-top: 50px;
+  color: var(--color-black);
+}
+
+/* the "Click here to search..." button, and the box it turns into */
+.help-search {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 20px;
+}
+
+.help-search-button,
+.help-search-input {
+  width: 344px;
+  max-width: 100%;
+  height: 51px;
+  padding: 0 4px;
+  white-space: nowrap;             /* the button text stays on one line */
+  border: var(--border);
+  border-radius: 0;                /* square corners, like the mockup */
+  background: var(--color-accent);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-heading);
+  text-align: center;
+}
+
+.help-search-button {
+  cursor: pointer;
+}
+
+.help-search-input::placeholder {
+  color: var(--color-heading);
+  opacity: 0.7;
+}
+
+.help-subtitle {
+  margin-bottom: 10px;
+  font-size: 1.45rem;              /* ~23px */
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* the 4 category buttons (two columns, widths copied from the mockup) */
+.category-grid {
+  display: grid;
+  grid-template-columns: 379px 365px;
+  gap: 20px 86px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-button {
+  width: 100%;
+  min-height: 116px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-card);
+  font-family: inherit;
+  font-size: var(--size-nav);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.category-button:hover {
+  filter: brightness(0.96);
+}
+
+/* questions and answers (shown after a category is chosen or a search is typed) */
+.faq-panel {
+  max-width: 830px;
+  margin: 0 auto;
+}
+
+.faq-back {
+  margin-bottom: 14px;
+  padding: 0.5rem 1.25rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-family: inherit;
+  font-size: var(--size-small-btn);
+  font-weight: var(--weight-bold);
+  color: var(--color-heading);
+  cursor: pointer;
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.faq-item {
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-card);
+}
+
+.faq-item summary {
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  font-weight: var(--weight-bold);
+  line-height: 1.3;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.faq-item p {
+  padding: 0 18px 16px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.faq-empty {
+  padding: 1rem;
+  text-align: center;
+}
+
+/* =========================================================
+   3. ABOUT
+   ========================================================= */
+.about-intro {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 34px;
+  align-items: start;
+  padding: 34px clamp(1rem, 5.2vw, 67px) 55px clamp(1rem, 7.3vw, 93px);
+}
+
+/* cream card holding the three pictures.
+   Pictures are placed with percentages measured from the mockup. */
+.about-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 380 / 234;
+  margin: 0;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-card);
+}
+
+.about-card img {
+  position: absolute;
+  max-width: none;
+}
+
+.about-collage {
+  left: 9.3%;
+  top: 9.6%;
+  width: 37.8%;
+  height: 82.6%;
+  object-fit: contain;
+}
+
+.about-ticket {
+  left: 58.5%;
+  top: 10.9%;
+  width: 33.5%;
+}
+
+.about-supplies {
+  left: 59.8%;
+  top: 44.8%;
+  width: 31.6%;
+}
+
+.about-label {
+  margin: 4px 0 22px;
+  font-size: var(--size-nav);      /* ~21px, light */
+  font-weight: var(--weight-light);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.about-text :is(h1, h2) {
+  margin-bottom: 17px;
+  font-size: 2.5rem;               /* 40px, light, two lines */
+  font-weight: var(--weight-light);
+  line-height: 1;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.about-text p {
+  max-width: 710px;
+  font-size: 1.125rem;             /* 18px */
+  line-height: 1;
+}
+
+.about-text p + p {
+  margin-top: 18px;
+}
+
+/* pale teal band: mission on the left, values on the right */
+.about-details {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  padding: 18px clamp(1rem, 7.3vw, 93px) 24px;
+  background: var(--color-surface);
+}
+
+.about-details h2 {
+  margin: 0 0 25px;
+  font-size: var(--size-nav);
+  font-weight: var(--weight-light);
+  text-align: left;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--color-black);
+}
+
+.mission p {
+  max-width: 350px;
+  font-size: 1.05rem;              /* ~17px */
+  line-height: 1.13;
+}
+
+.mission p + p {
+  margin-top: 19px;
+}
+
+/* the heading sits level with the mission heading; the dark line is on the list */
+.values h2 {
+  margin-bottom: 20px;             /* mockup: the dark line starts a bit higher than the mission text */
+  padding-left: 34px;
+}
+
+.values-list {
+  display: grid;
+  grid-template-columns: minmax(0, 330px) minmax(0, 310px);   /* shrinks on smaller screens */
+  gap: 18px clamp(1rem, 4.5vw, 57px);
+  margin: 0;
+  padding: 13px 0 13px 30px;
+  border-left: 4px solid var(--color-text);
+  list-style: none;
+}
+
+.values-list h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: var(--weight-bold);
+  line-height: 1.13;
+  color: var(--color-black);
+}
+
+.values-list p {
+  font-size: 1.05rem;
+  line-height: 1.13;
+  color: var(--color-black);
+}
+
+/* "Because what you share, stays with them." */
+.about-tagline {
+  width: min(992px, calc(100% - 2rem));
+  margin: 22px auto 0;
+  padding: 29px 1rem 31px;
+  background: var(--color-accent);
+  font-size: 1.05rem;
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  text-align: center;
+  color: var(--color-heading);
+}
+
+/* =========================================================
+   4. SMALLER SCREENS
+   ========================================================= */
+@media (max-width: 1000px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .step-card {
+    min-height: 200px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .about-intro,
+  .about-details {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .about-card {
+    margin-inline: auto;
+  }
+
+  .values h2 {
+    padding-left: 0;
+  }
+
+  .values-list {
+    grid-template-columns: 1fr;
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-title {
+    font-size: 2.6rem;
+  }
+
+  .steps,
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create an account | Axia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth" data-page="register" data-root="../">
+  <header class="auth-top"><a href="login.html">Already Using? <strong>Log In</strong> &gt;</a></header>
+  <main class="auth-box">
+    <h1>Axia</h1><p class="tag">Meaning begins with something small.</p>
+    <div class="oauth"><button type="button" data-oauth>Join with Apple</button><button type="button" data-oauth>Join with Google</button></div><div class="or">OR</div>
+    <form id="form" novalidate>
+      <input type="text" id="name" placeholder="Enter your name (Optional):" autocomplete="name" aria-label="Enter your name (Optional)">
+      <input type="email" id="email" placeholder="Enter your email:" autocomplete="email" aria-label="Enter your email">
+      <input type="password" id="pw" placeholder="Enter your password:" autocomplete="new-password" aria-label="Enter your password">
+      <input type="password" id="pw2" placeholder="Enter confirm password:" autocomplete="new-password" aria-label="Enter confirm password">
+      <p class="auth-msg" id="msg" role="alert"></p>
+      <button class="auth-btn" type="submit">NEXT</button>
+    </form>
+  </main>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>
