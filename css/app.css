@@ -151,3 +151,11 @@ button.bar:disabled{cursor:default;color:var(--color-heading);opacity:1}
 .ws-user .ws-hint{margin-top:65px;text-align:right}
 .ws-user .ws-hint .bt{margin-top:0;min-width:0;padding:.9rem 1.7rem;border-radius:14px;font-size:1.45rem}
 @media(max-width:900px){.ws-user .tiles{gap:14px 20px;padding-right:0}.ws-user .tile{width:140px}.ws-user .ws-hint{margin-top:30px;text-align:center}.ws-user .ws-hint .bt{font-size:1.1rem}.ws-user .arrow{margin-top:0}}
+/* ---------- Settings > How it works: same cards as the landing page ----------
+   Scoped to this one page (data-view="how"), so no other section is affected.
+   Yellow number badge on top, title and text kept close together, equal-height cards. */
+body[data-view=how] .steps{gap:16px}
+body[data-view=how] .step-card{min-height:0;grid-template-rows:auto 1fr}
+body[data-view=how] .step-card h2{min-height:118px;padding:22px 8px 0;font-size:.95rem;line-height:1.2}
+body[data-view=how] .step-card p{padding:10px 12px 18px;font-size:.88rem;line-height:1.45}
+@media(max-width:1000px){body[data-view=how] .step-card h2{min-height:0}}
