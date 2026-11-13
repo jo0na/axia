@@ -731,3 +731,74 @@ input[type="text"]::-ms-reveal {
   height: 0 !important;
   pointer-events: none !important;
 }
+
+/* =========================================================
+   12. PROFESSIONAL POLISH, ROUND 2 (looks only)
+   Same Poppins font, same palette, same page layouts.
+   It does NOT touch the pop-up windows (.overlay / .modal).
+   What it does: step numbers on their own line, even Help cards,
+   consistent text colour, a friendlier
+   recipient page (pages/open.html), on-palette pager buttons and
+   clearer category names on the logged-in Create page.
+   To undo, delete from this comment to the end of the file.
+   ========================================================= */
+
+/* How It Works: the "01" sits on its own line above the title, cards get breathing room */
+.step-no {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 10px;
+  border: var(--border);
+  border-radius: 50%;
+  background: var(--color-highlight);      /* your yellow, like the active nav pill */
+  font-size: 0.85rem;
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-on-highlight);
+}
+body .step-card h2 { align-self: start; padding: 22px 6px 0; text-wrap: balance; }  /* numbers + titles line up across all 5 cards */
+body .step-card p  { padding-inline: 10px; text-wrap: pretty; }
+
+/* Help: same text colour as every other page, the two columns equal, room under the heading */
+body .help-page .page-lead { color: var(--color-text); }
+body .help-subtitle        { margin-top: 6px; margin-bottom: 20px; }
+@media (min-width: 1001px) {
+  body .category-grid { grid-template-columns: 372px 372px; }
+}
+
+/* Logged-in Create page: category name matches the guest page */
+body .ws-user .cat-name {
+  font-size: 1.15rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-heading);
+}
+
+/* For Me / For Someone: the greyed "previous/next" button used an off-palette brown-grey */
+body .pager .bt:disabled { background: var(--color-card); opacity: 0.5; }
+
+/* Recipient page (pages/open.html): what the person receiving the gift sees */
+body .viewer { width: 100%; }   /* was shrink-to-fit, so its width changed with the gift's text */
+body .viewer h1 {
+  margin-bottom: 8px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.01em;
+}
+body .viewer h1 + p {
+  margin: 0 0 22px;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0.85;
+}
+body .viewer .vitem          { box-shadow: var(--shadow-soft); }
+body .viewer .vitem pre      { line-height: 1.6; }
+body .viewer .vitem a {
+  color: var(--color-heading);        /* was the browser's default blue */
+  font-weight: var(--weight-semibold);
+  text-underline-offset: 3px;
+}
+body .viewer .vitem a:hover  { background: var(--color-highlight); color: var(--color-on-highlight); }
+body .viewer > p:last-child  { margin-top: 26px; font-size: 0.95rem; text-align: center; opacity: 0.8; }
