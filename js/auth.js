@@ -100,7 +100,7 @@
           photo = c.toDataURL("image/jpeg", 0.8); avatar = ""; preview.src = photo; say("");
           box.querySelectorAll(".av").forEach(function (x) { x.classList.remove("on"); });
         };
-        img.onerror = function () { say("That file is not a picture we can read."); };
+        img.onerror = function () { say("This file couldn’t be read as an image."); };
         img.src = r.result;
       };
       r.readAsDataURL(file);
@@ -121,7 +121,7 @@
     $("form").addEventListener("submit", function (e) {
       e.preventDefault();
       const acc = S.findAccount($("email").value);
-      if (!acc || acc.password !== $("pw").value) return say("That email or password is not right. Please try again.");
+      if (!acc || acc.password !== $("pw").value) return say("Incorrect email or password. Please try again.");
       S.startUserSession(acc.email, false);
       location.href = "start.html";
     });

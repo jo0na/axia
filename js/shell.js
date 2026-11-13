@@ -39,13 +39,13 @@
     const pager = document.getElementById("pager"), end = document.getElementById("end");
     function show() {
       list.replaceChildren(); end.hidden = true;
-      if (!pk.length) { list.append(el("p", "end", "Nothing here yet. Head to Start to make your first package.")); pager.hidden = true; return; }
+      if (!pk.length) { list.append(el("p", "end", "No packages yet. Go to Start to create your first one.")); pager.hidden = true; return; }
       const p = pk[i], types = {}, card = el("div", "pkg"), img = el("img"), body = el("div"), ul = el("ul");
       p.items.forEach(function (it) { types[it.type] = 1; });
       Object.keys(types).forEach(function (t) { ul.append(el("li", "", Axia.types[t].name)); });
       img.src = "../assets/images/gifts/" + (p.purpose === "me" ? "for-me-pink" : "for-someone-yellow") + ".png"; img.alt = "";
       const open = el("a", "bt", "Open"); open.href = "open.html?p=" + p.id;
-      body.append(el("h2", "", p.title), el("p", "", "Items packed summary:"), ul, el("strong", "", Object.keys(types).length + (Object.keys(types).length === 1 ? " Content type • " : " Content types • ") + p.items.length + (p.items.length === 1 ? " item included" : " items included")));
+      body.append(el("h2", "", p.title), el("p", "", "Items in this package:"), ul, el("strong", "", Object.keys(types).length + (Object.keys(types).length === 1 ? " Content type • " : " Content types • ") + p.items.length + (p.items.length === 1 ? " item included" : " items included")));
       card.append(img, body, open); list.append(card);
       prev.disabled = i === 0; next.disabled = i === pk.length - 1; end.hidden = i !== pk.length - 1; pager.hidden = false;
     }

@@ -41,7 +41,7 @@
           photo = c.toDataURL("image/jpeg", 0.8); prev.src = photo; note.textContent = file.name; say("pf-msg", "");
           box.querySelectorAll(".av").forEach(function (x) { x.classList.remove("on"); });
         };
-        img.onerror = function () { say("pf-msg", "That file is not a picture we can read."); };
+        img.onerror = function () { say("pf-msg", "This file couldn’t be read as an image."); };
         img.src = r.result;
       };
       r.readAsDataURL(file);
@@ -62,7 +62,7 @@
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return say("ac-msg", "Please enter a valid email address.");
       if (email !== user.email) { if (S.findAccount(email)) return say("ac-msg", "That email already has an account."); changes.email = email; }
       if (pw || $("ac-new2").value) {
-        if (oldPw !== user.password) return say("ac-msg", "Your current password is not right.");
+        if (oldPw !== user.password) return say("ac-msg", "Your current password is incorrect.");
         if (pw.length < 6) return say("ac-msg", "Your new password needs at least 6 characters.");
         if (pw !== $("ac-new2").value) return say("ac-msg", "The two new passwords do not match.");
         changes.password = pw;
