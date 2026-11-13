@@ -233,3 +233,88 @@
     margin-bottom: 48px;
   }
 }
+
+/* =========================================================
+   4. FOOTER (bottom of the Home page, under About)
+   Uses the website's own colours, so dark mode works too.
+   ========================================================= */
+
+/* a little breathing room between the tagline band and the footer */
+#about .about-tagline { margin-bottom: 48px; }
+
+.site-footer {
+  background: var(--color-surface);
+  border-top: var(--border);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 32px clamp(1.5rem, 6vw, 80px);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 44px var(--page-padding) 32px;
+}
+
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+.footer-brand p {
+  max-width: 22em;
+  color: var(--color-text);
+}
+
+.footer-col h3 {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-heading);
+}
+
+.footer-col ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.footer-col a:hover,
+.footer-logo:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  padding: 18px var(--page-padding);
+  border-top: 1px solid rgba(9, 11, 11, 0.2);
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-text);
+}
+
+@media (max-width: 700px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    padding-top: 32px;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
