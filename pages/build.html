@@ -20,9 +20,9 @@
     body[data-page="build"] .ws.ws-user .arrow.live svg{fill:none !important}
     body[data-page="build"] .ws.ws-user .arrow:not(:disabled):hover svg,
     body[data-page="build"] .ws.ws-user .arrow:not(:disabled):focus-visible svg{fill:var(--color-highlight) !important}
-    /* 2) names above the tiles (Letter, Photo, ...): only while the cursor is on that tile.
+    /* 2) names above the tiles (Letter, Photo, ...): always visible (they used to show only on hover).
           The name is the <div> inside each .tile (the other two items are buttons), so no class name is needed. */
-    body[data-page="build"] .ws.ws-user .tile > div{opacity:0 !important;transition:opacity .15s}
+    body[data-page="build"] .ws.ws-user .tile > div{opacity:1 !important}
     body[data-page="build"] .ws.ws-user .tile:hover > div,
     body[data-page="build"] .ws.ws-user .tile:focus-within > div{opacity:1 !important}
     @media(hover:none){body[data-page="build"] .ws.ws-user .tile > div{opacity:1 !important}}

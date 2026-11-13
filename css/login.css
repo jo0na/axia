@@ -16,8 +16,8 @@ body.login .auth-box h1{font-size:3.83rem;line-height:1.07}
 body.login .auth-box .tag{margin:7px 0 35px;font-size:1.2rem;line-height:1.1}
 
 /* Apple / Google buttons */
-body.login .oauth{gap:53px}
-body.login .oauth button{width:196px;height:57px;padding:0;font-size:1.28rem;line-height:1.1}
+body.login .oauth{gap:36px}
+body.login .oauth button{width:230px;height:57px;padding:0;font-size:1.28rem;line-height:1.1}
 
 /* OR divider */
 body.login .or{gap:7px;margin:29px 0 47px;font-size:1.13rem;font-weight:var(--weight-bold);color:var(--color-text);opacity:.75}
@@ -35,5 +35,5 @@ body.login .auth-btn{width:238px;height:60px;margin-top:24px;padding:0;font-size
   body.login .auth-top{height:auto;padding:16px}
   body.login .auth-box h1{font-size:3rem}
   body.login .oauth{gap:14px}
-  body.login .oauth button{width:100%;max-width:196px}
+  body.login .oauth button{width:100%;max-width:230px}
 }

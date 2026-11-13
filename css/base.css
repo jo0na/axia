@@ -802,3 +802,14 @@ body .viewer .vitem a {
 }
 body .viewer .vitem a:hover  { background: var(--color-highlight); color: var(--color-on-highlight); }
 body .viewer > p:last-child  { margin-top: 26px; font-size: 0.95rem; text-align: center; opacity: 0.8; }
+
+/* Logged-in Create page: tile names are always visible now, so make them easy to read
+   (centred over the tile, same look as the guest page). Pop-ups are not touched. */
+body .ws-user .tile > div:first-child {
+  padding-right: 0;
+  font-size: 0.85rem;
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--color-heading);
+}

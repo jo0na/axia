@@ -15,9 +15,9 @@
     /* 1) the + under each tile: same bold outlined plus as the logged-in page, yellow when the cursor is on the tile */
     body[data-page="guest"] .tile .plus{width:26px;height:24px;margin:2px auto 6.8px;padding:0;overflow:hidden;white-space:nowrap;text-indent:-999px;line-height:0;color:transparent;-webkit-text-stroke:0;font-size:0;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpolygon points='9,1 17,1 17,9 25,9 25,17 17,17 17,25 9,25 9,17 1,17 1,9 9,9' fill='%23fffffe' stroke='%23272343' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")}
     body[data-page="guest"] .tile:hover .plus,body[data-page="guest"] .plus:focus-visible{color:transparent;-webkit-text-stroke:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpolygon points='9,1 17,1 17,9 25,9 25,17 17,17 17,25 9,25 9,17 1,17 1,9 9,9' fill='%23ffd803' stroke='%23272343' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")}
-    /* 2) names above the tiles (Letter, Photo, ...): only while the cursor is on that tile.
+    /* 2) names above the tiles (Letter, Photo, ...): always visible (they used to show only on hover).
           The name is the <div> inside each .tile (the other two items are buttons), so no class name is needed. */
-    body[data-page="guest"] .tile > div{opacity:0 !important;transition:opacity .15s}
+    body[data-page="guest"] .tile > div{opacity:1 !important}
     body[data-page="guest"] .tile:hover > div,
     body[data-page="guest"] .tile:focus-within > div{opacity:1 !important}
     @media(hover:none){body[data-page="guest"] .tile > div{opacity:1 !important}}
