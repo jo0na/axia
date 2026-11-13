@@ -181,3 +181,8 @@ body[data-view=help] .toprow .help-search-input{width:300px;max-width:100%;paddi
    and uses the same 340px width as the Help page. Scoped to these two pages only. */
 body[data-view=how] .bar.back,
 body[data-view=about] .bar.back{max-width:340px;margin:0 0 30px max(0px,calc((100% - 880px)/2))}
+
+/* ---------- Start page greeting ("Good morning, Name") ----------
+   Slightly smaller so a longer greeting fits the top bar; a very long username is shortened with "…".
+   Scoped to the Start page only. */
+body[data-page=start] .app-top #top-msg{display:block;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.35;padding-bottom:.12em;font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:var(--weight-medium)}

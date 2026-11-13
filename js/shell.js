@@ -30,7 +30,13 @@
   side.append(logo, nav, me);
 
   const top = document.getElementById("top-msg");
-  if (top && page === "start") { const s = S.getSession(); top.textContent = s.isNew ? "Welcome!" : "Welcome back!"; }
+  if (top && page === "start") {
+    // Start page greeting: follows the visitor's own clock (morning until 11:59, afternoon until 5:59 pm, evening after that)
+    const s = S.getSession();
+    const greeting = function () { const h = new Date().getHours(); return h >= 5 && h < 12 ? "Good morning" : h >= 12 && h < 18 ? "Good afternoon" : "Good evening"; };
+    const paint = function () { top.textContent = s.isNew ? "Welcome, " + user.username + "!" : greeting() + ", " + user.username; top.title = top.textContent; };
+    paint(); setInterval(paint, 60000);   // re-checks every minute, so it changes if the page stays open past noon or 6 pm
+  }
   const yes = document.querySelectorAll("[data-for]");           // Start page: choose the purpose
   yes.forEach(function (b) { b.onclick = function () { location.href = "build.html?for=" + b.dataset.for; }; });
   const list = document.getElementById("pkg-list");               // For Me / For Someone pages
