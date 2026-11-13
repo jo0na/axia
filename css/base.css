@@ -573,3 +573,89 @@ html {
     transform: none;
   }
 }
+
+
+/* =========================================================
+   9. TEXT & FORM REFINEMENTS (readability + consistency)
+   Same Poppins font, same colours, same page layouts.
+   What it changes: heading weight, line spacing and small text size,
+   the gap under the top band on Register / Log In / Profile Setup,
+   rounded corners on the Help search box and the invoice panel,
+   and lighter form fields. To undo, delete from this comment to the end.
+   ========================================================= */
+
+/* 1) Headings: a touch bolder so they stand out, and balanced line breaks
+      (no more one lonely word on the last line) */
+body .hero h1,
+body .collections h2,
+body .page-title,
+body .stage h1 {
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.01em;
+}
+body h1,
+body h2,
+body .stage .tag,
+body .page-lead,
+body .hero p,
+body .collections > p {
+  text-wrap: balance;
+}
+
+/* 2) Paragraph text: more space between lines so it is easier to read */
+body .hero p,
+body .collections > p,
+body .page-lead,
+body .step-card p,
+body .about-text p,
+body .mission p,
+body .values-list p,
+body .stage .tag,
+body .faq-item p,
+body .help-page .page-lead {
+  line-height: 1.4;
+}
+
+/* 3) Small text made a little bigger (was about 14px, now 16px) */
+body .step-card p {
+  font-size: 1rem;
+}
+body .step-card h2 {
+  line-height: 1.15;
+}
+body .mission p,
+body .values-list p,
+body .values-list h3 {
+  font-size: 1.1rem;
+}
+
+/* 4) Register / Log In / Profile Setup: breathing room under the top band */
+html body.auth .auth-box {
+  padding-top: 40px;
+}
+
+/* 5) Rounded corners to match the rest of the site */
+body .help-search-button,
+body .help-search-input,
+body .invoice {
+  border-radius: var(--radius);
+}
+
+/* 6) Form fields: lighter fill (your pale teal) so the forms feel less heavy,
+      plus a clear yellow glow when you click in */
+html body.auth .auth-box input[type=text],
+html body.auth .auth-box input[type=email],
+html body.auth .auth-box input[type=password],
+body .finput,
+body .help-search-input {
+  background: var(--color-surface);
+}
+body .finput:focus,
+html body.auth .auth-box input:focus {
+  background: var(--color-page);
+}
+
+/* 7) Disabled buttons: still clearly "off", but readable */
+body .bt:disabled {
+  opacity: 0.6;
+}
