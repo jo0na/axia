@@ -720,7 +720,14 @@ body[data-page="guest"] .invoice .bt {
    Microsoft Edge adds its own "show password" eye, which doubled up
    with the website's eye button. This hides only Edge's copy.
    ========================================================= */
+input::-ms-reveal,
+input::-ms-clear,
 input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
-  display: none;
+input[type="password"]::-ms-clear,
+input[type="text"]::-ms-reveal {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
 }
