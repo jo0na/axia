@@ -16,6 +16,7 @@
     const css = document.createElement("style");
     css.textContent =
       ".pw-wrap{position:relative}" +
+      ".pw-wrap input::-ms-reveal,.pw-wrap input::-ms-clear{display:none !important;visibility:hidden !important;width:0 !important;height:0 !important}" +
       ".pw-wrap input[type=password],.pw-wrap input[type=text]{padding-right:56px !important}" +
       ".pw-eye{position:absolute;top:50%;right:18px;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:28px;height:28px;margin:0;padding:0;border:0;background:none;color:var(--color-text);cursor:pointer}" +
       ".pw-eye svg{width:22px;height:22px;display:block}" +
