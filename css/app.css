@@ -175,3 +175,9 @@ body[data-view=help] .toprow .bar.back{margin:0;flex:0 1 340px;width:auto}
 body[data-view=help] .toprow .help-search{flex:0 0 auto}
 body[data-view=help] .toprow .help-search-button,
 body[data-view=help] .toprow .help-search-input{width:300px;max-width:100%;padding:0 16px}
+
+/* ---------- Settings > How it works? and About Us: Back lines up with the panel ----------
+   The panel is centred (max 880px wide). The Back bar now starts exactly on the panel's left edge
+   and uses the same 340px width as the Help page. Scoped to these two pages only. */
+body[data-view=how] .bar.back,
+body[data-view=about] .bar.back{max-width:340px;margin:0 0 30px max(0px,calc((100% - 880px)/2))}
