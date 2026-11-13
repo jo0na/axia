@@ -159,3 +159,9 @@ body[data-view=how] .step-card{min-height:0;grid-template-rows:auto 1fr}
 body[data-view=how] .step-card h2{min-height:118px;padding:22px 8px 0;font-size:.95rem;line-height:1.2}
 body[data-view=how] .step-card p{padding:10px 12px 18px;font-size:.88rem;line-height:1.45}
 @media(max-width:1000px){body[data-view=how] .step-card h2{min-height:0}}
+
+/* ---------- Profile and Email & Password: line the back bar up with the form card ----------
+   Both are now the same width and centred in the same column.
+   Scoped to these two pages (data-view), so the other settings pages are not affected. */
+body[data-view=profile] .bar.back,
+body[data-view=account] .bar.back{max-width:520px;margin:0 auto 30px}
