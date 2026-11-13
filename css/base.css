@@ -713,3 +713,14 @@ body[data-page="guest"] .inv-note {
 body[data-page="guest"] .invoice .bt {
   font-size: 0.9rem;
 }
+
+
+/* =========================================================
+   11. PASSWORD BOX: hide the browser's own eye icon
+   Microsoft Edge adds its own "show password" eye, which doubled up
+   with the website's eye button. This hides only Edge's copy.
+   ========================================================= */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
