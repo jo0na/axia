@@ -15,8 +15,7 @@
     .mg-bar{position:absolute;top:-34px;right:1rem;display:flex;gap:8px}
     .mg-btn{height:26px;padding:0 14px;border:var(--border);border-radius:13px;background:var(--color-card);font:inherit;font-size:.72rem;font-weight:var(--weight-bold);color:var(--color-heading);cursor:pointer}
     .mg-btn:hover:not(:disabled){filter:brightness(.95)}.mg-btn:disabled{opacity:.45;cursor:not-allowed}
-    .mg-red,.mg-del{color:var(--color-error)}
-    .mg-del{position:absolute;top:10px;right:12px}
+    .mg-red{color:var(--color-error)}
     .mg-check{position:absolute;top:12px;right:14px;width:20px;height:20px;margin:0;accent-color:var(--color-highlight);cursor:pointer}
   </style>
 </head>
@@ -33,7 +32,7 @@
     function manage(pkg, nodes, box) {
       const mk = function (tag, cls, text) { const e = document.createElement(tag); e.className = cls; if (text) e.textContent = text; if (tag === "button") e.type = "button"; return e; };
       const backHref = pkg.purpose === "someone" ? "for-someone.html" : "for-me.html";
-      let rows = pkg.items.map(function (it, i) { return { it: it, node: nodes[i], del: mk("button", "mg-btn mg-del", "Delete"), cb: mk("input", "mg-check") }; });
+      let rows = pkg.items.map(function (it, i) { return { it: it, node: nodes[i], cb: mk("input", "mg-check") }; });
       let selecting = false, chosen = new Set();
       const bar = mk("div", "mg-bar"); box.style.position = "relative"; box.append(bar);
       function save(items) {
@@ -65,11 +64,10 @@
           bar.append(all, del, cancel);
         }
         rows.forEach(function (r) {
-          r.node.style.position = "relative"; r.del.hidden = selecting; r.cb.hidden = !selecting; r.cb.type = "checkbox"; r.cb.checked = chosen.has(r);
-          r.del.setAttribute("aria-label", "Delete this item"); r.cb.setAttribute("aria-label", "Select this item");
-          r.del.onclick = function () { remove([r]); };
+          r.node.style.position = "relative"; r.cb.hidden = !selecting; r.cb.type = "checkbox"; r.cb.checked = chosen.has(r);
+          r.cb.setAttribute("aria-label", "Select this item");
           r.cb.onchange = function () { if (r.cb.checked) chosen.add(r); else chosen.delete(r); draw(); };
-          if (!r.del.parentNode) r.node.append(r.del, r.cb);
+          if (!r.cb.parentNode) r.node.append(r.cb);
         });
       }
       draw();
