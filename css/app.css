@@ -191,3 +191,28 @@ body[data-page=start] .app-top #top-msg{display:block;min-width:0;max-width:100%
    The name keeps its space (visibility, not display), so nothing on the page moves. */
 .ws-user .tile>div:first-child{visibility:hidden}
 .ws-user .tile:hover>div:first-child,.ws-user .tile:focus-within>div:first-child{visibility:visible}
+
+/* ---------- Create page: content names (Letter, Photo, Video...) only show while hovering a tile ----------
+   The name keeps its space (visibility, not display), so nothing on the page moves. */
+.ws-user .tile>div:first-child{visibility:hidden}
+.ws-user .tile:hover>div:first-child,.ws-user .tile:focus-within>div:first-child{visibility:visible}
+
+/* ---------- For Me / For Someone: delete a package, or select several and delete them together ----------
+   New rules only. The Select and Delete buttons sit on top of the existing card (absolute), so the card,
+   the Open button and the arrows keep their size and position. */
+.pk-act{min-width:0;padding:0 16px;height:34px;border:var(--border);border-radius:17px;background:var(--color-card);box-shadow:var(--shadow-soft);font:inherit;font-size:.8rem;font-weight:var(--weight-bold);color:var(--color-heading);cursor:pointer}
+.pk-act:hover:not(:disabled){filter:brightness(.95)}
+.pk-act:disabled{opacity:.45;cursor:not-allowed}
+.pkg .pk-select{position:absolute;top:15px;left:15px}
+.pkg .pk-delete{position:absolute;right:15px;bottom:15px;background:#fbe3e1;color:var(--color-error)}
+:root[data-theme="dark"] .pkg .pk-delete{background:var(--color-card);color:#ff9d96}
+.sel-wrap{max-width:767px;margin:60px auto 0}
+.sel-tools{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:22px}
+.pk-delete-sel{background:#fbe3e1;color:var(--color-error)}
+:root[data-theme="dark"] .pk-delete-sel{background:var(--color-card);color:#ff9d96}
+.sel-rows{display:grid;gap:14px}
+.sel-row{display:flex;align-items:center;gap:18px;padding:16px 22px;border:var(--border);border-radius:var(--radius);background:var(--color-panel);box-shadow:var(--shadow-soft);color:var(--color-heading);cursor:pointer}
+.sel-row input{flex:none;width:22px;height:22px;accent-color:var(--color-highlight);cursor:pointer}
+.sel-txt{display:grid;gap:2px;min-width:0}
+.sel-txt b{font-size:1.1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sel-txt small{font-size:.85rem;color:var(--color-text)}
