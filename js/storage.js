@@ -97,13 +97,6 @@ Axia.storage = (function () {
       localStorage.setItem("axia_shared", JSON.stringify(all)); return true;
     } catch (e) { return false; }
   }
-  function deletePackages(ids) {                   // remove one or more saved packages (also stops their share links working)
-    try {
-      const all = JSON.parse(localStorage.getItem("axia_shared") || "{}");
-      ids.forEach(function (id) { delete all[id]; });
-      localStorage.setItem("axia_shared", JSON.stringify(all)); return true;
-    } catch (e) { return false; }
-  }
   function myPackages(email, purpose) {
     try { return Object.values(JSON.parse(localStorage.getItem("axia_shared") || "{}")).filter(function (p) { return p.owner === email && p.purpose === purpose; }).sort(function (a, b) { return b.made - a.made; }); }
     catch (e) { return []; }
@@ -112,7 +105,7 @@ Axia.storage = (function () {
   // everything other files are allowed to use
   return {
     accounts: accounts, findAccount: findAccount, addAccount: addAccount, updateAccount: updateAccount, startUserSession: startUserSession,
-    currentUser: currentUser, savePackage: savePackage, deletePackages: deletePackages, myPackages: myPackages,
+    currentUser: currentUser, savePackage: savePackage, myPackages: myPackages,
     getSettings: getSettings,
     saveSettings: saveSettings,
     getSession: getSession,
