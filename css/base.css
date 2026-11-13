@@ -364,3 +364,212 @@ body #photo:active::file-selector-button {
   filter: none;
   box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0.35);
 }
+
+/* =========================================================
+   8. POLISH LAYER (looks only)
+   Adds soft shadows, smooth hover/focus feedback and crisper text.
+   It does NOT change any size, position, spacing, alignment,
+   border, colour palette or layout. To turn the whole layer off,
+   delete everything from this comment down to the end of the file.
+   ========================================================= */
+
+/* two soft shadow strengths, reused below (dark mode gets a deeper one) */
+:root {
+  --shadow-soft: 0 2px 6px rgba(39, 35, 67, 0.10), 0 6px 16px rgba(39, 35, 67, 0.08);
+  --shadow-lift: 0 4px 10px rgba(39, 35, 67, 0.14), 0 12px 24px rgba(39, 35, 67, 0.12);
+  --shadow-bar:  0 -3px 12px rgba(39, 35, 67, 0.10);
+  --shadow-nav:  0 3px 12px rgba(39, 35, 67, 0.10);
+  --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+:root[data-theme="dark"] {
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.25);
+  --shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.45), 0 12px 24px rgba(0, 0, 0, 0.30);
+  --shadow-bar:  0 -3px 12px rgba(0, 0, 0, 0.35);
+  --shadow-nav:  0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* crisper, smoother text everywhere */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* selected text uses the website's own yellow */
+::selection {
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+}
+
+/* navbar and bottom band float slightly above the page */
+.site-header   { box-shadow: var(--shadow-nav); }
+.cta-band      { box-shadow: var(--shadow-bar); }
+.app-top       { box-shadow: var(--shadow-nav); }
+.side          { box-shadow: 4px 0 12px rgba(39, 35, 67, 0.08); }
+.auth-top      { box-shadow: var(--shadow-nav); }
+
+/* cards and panels get a soft lift off the background */
+.step-card,
+.category-card,
+.category-button,
+.faq-item,
+.about-card,
+.plan,
+.pkg,
+.spanel,
+.panel,
+.menu,
+.invoice {
+  box-shadow: var(--shadow-soft);
+}
+
+/* buttons: soft shadow + smooth colour change */
+.btn,
+.bt,
+.bar,
+.oauth button,
+.auth-btn,
+.help-search-button,
+.help-search-input,
+.faq-back,
+.seg button,
+.upload {
+  box-shadow: var(--shadow-soft);
+}
+
+/* smooth transitions (colour, shadow and brightness only) */
+.btn,
+.bt,
+.bar,
+.oauth button,
+.auth-btn,
+.help-search-button,
+.faq-back,
+.seg button,
+.upload,
+.av,
+.site-nav a,
+.side nav a,
+.category-button,
+.step-card,
+.faq-item,
+.srow,
+.menu .mi,
+.finput,
+.auth-box input,
+.help-search-input {
+  transition:
+    background-color 0.2s var(--ease-smooth),
+    box-shadow 0.25s var(--ease-smooth),
+    filter 0.2s var(--ease-smooth),
+    border-color 0.2s var(--ease-smooth),
+    color 0.2s var(--ease-smooth),
+    transform 0.25s var(--ease-smooth);
+}
+
+/* hover: a gentle 2px rise and a stronger shadow (moves visually only, never pushes neighbours) */
+.btn:not(:disabled):hover,
+.category-button:hover,
+.step-card:hover,
+.faq-item:hover,
+.oauth button:hover,
+.auth-btn:hover,
+.faq-back:hover,
+.help-search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* pressed: back down, flat, so the click feels real */
+body .btn:not(:disabled):active,
+body .category-button:active,
+body .oauth button:active,
+body .auth-btn:active,
+body .faq-back:active,
+body .help-search-button:active {
+  transform: translateY(0);
+}
+
+/* navbar links: soft teal tint on hover (the current page keeps its yellow pill) */
+.site-nav a:hover {
+  background: var(--color-accent);
+  border-color: transparent;
+  text-decoration: none;
+}
+.site-nav a[aria-current="page"]:hover {
+  background: var(--color-highlight);
+  border-color: var(--color-border);
+}
+
+/* sidebar links in the logged-in area: same idea */
+.side nav a:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+/* settings rows: smooth highlight */
+a.srow:hover {
+  background: var(--color-surface);
+}
+
+/* input boxes: a soft yellow glow when you click into them */
+.finput:focus,
+.auth-box input:focus,
+.help-search-input:focus,
+.invoice input:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 216, 3, 0.55);
+}
+
+/* keyboard focus ring stays visible, with a gentler look */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-heading);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* open FAQ question: clearer state */
+.faq-item[open] {
+  box-shadow: var(--shadow-lift);
+}
+
+/* disabled buttons: no shadow, so they look clearly "off" */
+.btn:disabled,
+.bt:disabled,
+button.bar:disabled,
+.pager .bt:disabled {
+  box-shadow: none;
+}
+
+/* thin, theme-coloured scrollbars */
+html {
+  scrollbar-color: var(--color-accent) var(--color-page);
+  scrollbar-width: thin;
+}
+
+/* people who prefer less motion get no movement */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .bt,
+  .category-button,
+  .step-card,
+  .faq-item,
+  .site-nav a,
+  .side nav a {
+    transition: none;
+  }
+  .btn:not(:disabled):hover,
+  .category-button:hover,
+  .step-card:hover,
+  .faq-item:hover,
+  .oauth button:hover,
+  .auth-btn:hover,
+  .faq-back:hover,
+  .help-search-button:hover {
+    transform: none;
+  }
+}
