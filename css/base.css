@@ -659,3 +659,57 @@ html body.auth .auth-box input:focus {
 body .bt:disabled {
   opacity: 0.6;
 }
+
+
+/* =========================================================
+   10. GUEST CREATE PAGE POLISH (pages/create.html only)
+   Every rule starts with body[data-page="guest"], so the pop-up
+   windows (.overlay / .modal) and the logged-in pages are NOT touched.
+   To undo, delete from this comment to the end of the file.
+   ========================================================= */
+
+/* tile name that appears on hover: centred, readable, a little bolder */
+body[data-page="guest"] .tile {
+  text-align: center;
+}
+body[data-page="guest"] .tile > div {
+  padding-bottom: 4px;
+  font-size: 0.95rem;
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  color: var(--color-heading);
+}
+
+/* category name under the tiles ("Something Personal"): a clearer label */
+body[data-page="guest"] .cat-name {
+  font-size: 1.15rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-heading);
+}
+
+/* invoice panel: easier-to-read text, softer empty state */
+body[data-page="guest"] .invoice {
+  font-size: 1rem;
+}
+body[data-page="guest"] .invoice label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+body[data-page="guest"] .invoice input {
+  padding: 8px 6px;
+  font-size: 0.95rem;
+}
+body[data-page="guest"] .inv-head {
+  opacity: 0.85;
+}
+body[data-page="guest"] .inv-empty {
+  opacity: 0.75;
+}
+body[data-page="guest"] .inv-note {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  opacity: 0.8;
+}
+body[data-page="guest"] .invoice .bt {
+  font-size: 0.9rem;
+}
