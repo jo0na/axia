@@ -36,18 +36,26 @@
       });
       return svg;
     }
+    // Edge/Chrome draw their OWN eye inside real password boxes, which doubled up with ours.
+    // Where the browser can hide the dots with CSS, the box becomes a text box that shows dots,
+    // so only OUR eye exists. Other browsers keep the normal password box (they have no extra eye).
+    const MASK = window.CSS && CSS.supports && CSS.supports("-webkit-text-security", "disc");
     fields.forEach(function (input) {
       const wrap = document.createElement("div"), btn = document.createElement("button");
+      let hidden = true;
       wrap.className = "pw-wrap"; input.parentNode.insertBefore(wrap, input); wrap.append(input);
       btn.type = "button"; btn.className = "pw-eye";
+      if (MASK) { input.type = "text"; input.style.webkitTextSecurity = "disc"; input.setAttribute("autocomplete", "off"); }
       function paint() {
-        const hidden = input.type === "password";
         btn.replaceChildren(icon(hidden));
         btn.setAttribute("aria-label", hidden ? "Show password" : "Hide password");
         btn.setAttribute("aria-pressed", String(!hidden));
       }
       btn.addEventListener("click", function () {
-        input.type = input.type === "password" ? "text" : "password"; paint(); input.focus();
+        hidden = !hidden;
+        if (MASK) input.style.webkitTextSecurity = hidden ? "disc" : "none";
+        else input.type = hidden ? "password" : "text";
+        paint(); input.focus();
       });
       paint(); wrap.append(btn);
     });
