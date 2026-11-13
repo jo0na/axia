@@ -8,19 +8,19 @@
   const CATS = [
     ["Something Personal", [
       ["letter", "Letter", "Letter", "personal/letter", [["text", "", "area", 1]]],
-      ["photo", "Photo", "Photo", "personal/photo", [["file", "Max file size: 5MB", "image", 1], ["caption", "Caption here (Optional)", "text"], ["msg", "Additional Message (Optional)", "text"]]],
+      ["photo", "Photo", "Photo", "personal/photo", [["file", "Max file size: 5MB", "image", 1], ["caption", "Add a caption (Optional)", "text"], ["msg", "Additional Message (Optional)", "text"]]],
       ["video", "Video", "Video", "personal/video", [["title", "Title", "text", 1], ["link", "Video Link (https://...)", "url", 1], MSG]],
       ["voice", "Voice Note", "Voice Notes", "personal/voice-notes", [["file", "", "rec", 1], MSG]],
       ["drawing", "Drawing", "Drawing", "personal/drawing", [["file", "", "draw", 1], ["msg", "Additional Message (Optional)", "text"]]]]],
     ["Something Useful", [
-      ["note", "Notes", "Notes & Study Materials", "useful/notes", [["title", "Note Title", "text", 1], ["text", "Write something...", "area", 1]]],
-      ["reviewer", "Reviewer", "Reviewer", "useful/reviewer", [["file", "Attach photos of the written reviewers", "image", 1], ["caption", "Caption here (Optional)", "text"], ["msg", "Additional Message (Optional)", "text"]]],
+      ["note", "Notes", "Notes & Study Materials", "useful/notes", [["title", "Note Title", "text", 1], ["text", "Write your note here...", "area", 1]]],
+      ["reviewer", "Reviewer", "Reviewer", "useful/reviewer", [["file", "Attach photos of the written reviewers", "image", 1], ["caption", "Add a caption (Optional)", "text"], ["msg", "Additional Message (Optional)", "text"]]],
       ["guide", "Guide", "Guide", "useful/guide", [["title", "Location", "text", 1], ["link", "Apple / Google Map Link (https://maps.google.com)", "url", 1], MSG]],
       ["tip", "Tips", "Tip", "useful/tips", [["title", "Tip Title", "text", 1], ["text", "Write your tip here", "area", 1], MSG]],
       ["checklist", "Checklist", "Checklist", "useful/checklist", [["title", "Checklist Title", "text", 1], ["text", "", "checklist", 1]]],
       ["file", "File", "File", "useful/file", [["file", "Add documents or other useful resources", "any", 1], ["caption", "Give this file a short caption (Optional)", "text"], ["msg", "Additional Message (Optional)", "text"]]]]],
     ["Recommendations they might enjoy", [
-      ["book", "Book", "Book Recommendation", "recommendations/books", [["title", "Book Title", "text", 1], ["file", "Attach an EPUB, MOBI, PDF, or TXT file of the book or novel you’re recommending.", "any", 0, ".epub,.mobi,.pdf,.txt"], ["genre", "Book Genre (Fantasy, Adventure, Horror...)", "text"], ["text", "What makes it worth reading - Short Summary (Optional)", "area"]]],
+      ["book", "Book", "Book Recommendation", "recommendations/books", [["title", "Book Title", "text", 1], ["file", "Attach an EPUB, MOBI, PDF, or TXT file of the book or novel you’re recommending.", "any", 0, ".epub,.mobi,.pdf,.txt"], ["genre", "Book Genre (Fantasy, Adventure, Horror...)", "text"], ["text", "Short summary: why it’s worth reading (Optional)", "area"]]],
       ["song", "Song", "Song Recommendation", "recommendations/songs", [["title", "Song Title", "text", 1], ["link", "Song Link (Spotify, Apple Music, YouTube Music...)", "url", 1], MSG]],
       ["movie", "Movie", "Movie Recommendation", "recommendations/movie", [["title", "Movie Title", "text", 1], ["genre", "Movie Genre (Sci-Fi, Documentary, Action...)", "text"], ["link", "Paste a streaming link (https://...)", "url"], ["text", "A short synopsis of the movie (Optional)", "area"]]],
       ["cafe", "Cafe", "Cafe Recommendation", "recommendations/cafe", [["title", "Cafe Name", "text", 1], ["link", "Location (Apple / Google Maps link)", "url", 1], ["text", "What to try (Iced latte, cheesecake...)", "text"], MSG]],
@@ -96,7 +96,7 @@
       m.classList.add("draw-modal");
       const c = el("canvas"), cx = c.getContext("2d"), col = el("input"), size = el("input"), bar = el("div", "tools"); let down = false, drawn = false; const hist = [];
       c.width = 386; c.height = 218; c.className = "sketch"; cx.fillStyle = "#fff"; cx.fillRect(0, 0, 386, 218); cx.lineCap = cx.lineJoin = "round";
-      col.type = "color"; col.value = "#ffd803"; col.setAttribute("aria-label", "Pen colour"); size.type = "range"; size.min = 1; size.max = 30; size.value = 4; size.setAttribute("aria-label", "Pen size"); const fill = function () { size.style.setProperty("--p", ((size.value - size.min) / (size.max - size.min) * 100) + "%"); }; size.addEventListener("input", fill); fill();
+      col.type = "color"; col.value = "#ffd803"; col.setAttribute("aria-label", "Pen color"); size.type = "range"; size.min = 1; size.max = 30; size.value = 4; size.setAttribute("aria-label", "Pen size"); const fill = function () { size.style.setProperty("--p", ((size.value - size.min) / (size.max - size.min) * 100) + "%"); }; size.addEventListener("input", fill); fill();
       if (/^data:image/.test(values.file || "")) { const im = new Image(); im.onload = function () { cx.drawImage(im, 0, 0, 386, 218); drawn = true; }; im.src = values.file; }
       function pt(e) { const r = c.getBoundingClientRect(); return [(e.clientX - r.left) * c.width / r.width, (e.clientY - r.top) * c.height / r.height]; }
       function snap() { hist.push(cx.getImageData(0, 0, 386, 218)); if (hist.length > 40) hist.shift(); undo.disabled = false; }
@@ -109,14 +109,14 @@
       w.undoKey = function (e) { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") { e.preventDefault(); undo.onclick(); } };
       document.addEventListener("keydown", w.undoKey); w.stop = function () { document.removeEventListener("keydown", w.undoKey); };
       bar.append(el("span", "", "Colour"), col, el("span", "", "Size"), size); const bar2 = el("div", "tools"); bar2.append(undo, clr); w.append(el("p", "lbl", "Draw your sketch"), c, bar, bar2);
-      w.get = function () { return drawn ? { file: c.toDataURL("image/png"), fileName: "drawing.png" } : null; }; w.miss = "Please draw something first.";
+      w.get = function () { return drawn ? { file: c.toDataURL("image/png"), fileName: "drawing.png" } : null; }; w.miss = "Please draw your sketch first.";
     } else if (kind === "idcard") {
       let photo = values.file || "", fileName = values.fileName || ""; m.classList.add("card-modal");
       const c = el("div", "idc"), title = el("textarea", "idc-title"), top = el("div", "idc-top"), pic = el("img", "idc-pic"), left = el("div"), pick = el("input"), addp = el("button", "bt idc-add", "Add a photo (Optional)"), f = el("div", "idc-fields"), msg = el("textarea", "idc-msg-in");
       title.maxLength = 60; title.placeholder = "Card Title\n(e.g., Special Travel Card)"; title.addEventListener("keydown", function (e) { if (e.key === "Enter") e.preventDefault(); }); title.value = values.title || ""; title.setAttribute("aria-label", "Card Title");
       pic.src = photo || SIL; pic.alt = "Card photo"; pick.type = "file"; pick.accept = "image/*"; pick.hidden = true; addp.type = "button";
       addp.onclick = function () { pick.click(); };
-      pick.onchange = async function () { const file = pick.files[0]; if (!file) return; if (file.size > 5 * 1024 * 1024) { addp.textContent = "Over 5MB — pick a smaller photo"; return; } photo = await shrink(await readFile(file)); fileName = file.name; pic.src = photo; addp.textContent = "Change photo"; };
+      pick.onchange = async function () { const file = pick.files[0]; if (!file) return; if (file.size > 5 * 1024 * 1024) { addp.textContent = "File is over 5MB. Please choose a smaller photo."; return; } photo = await shrink(await readFile(file)); fileName = file.name; pic.src = photo; addp.textContent = "Change photo"; };
       function field(label, key, type, ph) { const l = el("label"), i = el("input"); i.type = type; i.value = values[key] || ""; if (ph) i.placeholder = ph; i.setAttribute("aria-label", label); l.append(el("b", "", label + ": "), i); f.append(l); return i; }
       const who = field("Issued to", "who", "text", "Name"), dob = field("Date of birth", "dob", "date"), iss = field("Date of issue", "issued", "date");
       msg.placeholder = "Card Message (Optional)"; msg.value = values.text || ""; msg.setAttribute("aria-label", "Card Message");
@@ -124,7 +124,7 @@
       w.get = function () { const t = title.value.trim(); if (!t) return null; const d = { title: t }; if (who.value.trim()) d.who = who.value.trim(); if (dob.value) d.dob = dob.value; if (iss.value) d.issued = iss.value; if (msg.value.trim()) d.text = msg.value.trim(); if (photo) { d.file = photo; d.fileName = fileName || "card-photo"; } return d; };
       w.miss = "Please give your card a title.";
     } else if (kind === "checklist") {
-      const list = el("div", "cklist"), more = el("button", "bt tool", "Add more..."), lines = (values.text || "").split("\n").filter(Boolean);
+      const list = el("div", "cklist"), more = el("button", "bt tool", "Add more"), lines = (values.text || "").split("\n").filter(Boolean);
       function row(v) {
         const r = el("div", "ckrow"), inp = el("input"), x = el("button", "ckx", "×");
         inp.type = "text"; inp.value = v; inp.maxLength = 120; inp.placeholder = "Item " + (list.children.length + 1); inp.setAttribute("aria-label", "Checklist item");
@@ -148,7 +148,7 @@
         } catch (e) { st.textContent = "We couldn’t use the microphone. Please allow access and try again."; }
       };
       w.append(btn, au, st); w.classList.add("recbox");
-      w.get = function () { return data && data.length < 1500000 ? { file: data, fileName: "voice-note" } : null; }; w.miss = "Please record a voice note first (keep it under about a minute).";
+      w.get = function () { return data && data.length < 1500000 ? { file: data, fileName: "voice-note" } : null; }; w.miss = "Please record a voice note first (up to 60 seconds).";
     } else {
       const MAXF = 12, prev = el("div", "bq-box"), grid = el("div", "lgrid"), row = el("div", "fl"), side = el("div"), word = el("div", "wordrow"), chips = el("div", "chips"), on = (values.text || "").toUpperCase().split("").filter(function (L) { return /[A-Z]/.test(L); }).slice(0, MAXF), btns = {}, hint = el("p", "hint");
       const del = el("button", "bt tool", "⌫ Delete"), clr = el("button", "bt tool", "Clear all"); del.type = clr.type = "button"; del.setAttribute("aria-label", "Delete last letter");
@@ -156,7 +156,7 @@
         bouquet(prev, on, 286, 304);
         Object.keys(btns).forEach(function (L) { const k = on.filter(function (x) { return x === L; }).length; btns[L].classList.toggle("on", k > 0); btns[L].setAttribute("aria-pressed", k > 0); btns[L].dataset.n = k > 1 ? k : ""; });
         chips.replaceChildren(); on.forEach(function (L, i) { const c = el("button", "chip", L); c.type = "button"; c.title = "Remove this letter"; c.setAttribute("aria-label", "Remove " + L); c.onclick = function () { on.splice(i, 1); paint(); }; chips.append(c); });
-        del.disabled = clr.disabled = !on.length; hint.style.visibility = on.length ? "" : "hidden"; hint.textContent = on.length >= MAXF ? "That’s the most flowers a bouquet can hold (" + MAXF + ")." : on.length + " flower" + (on.length === 1 ? "" : "s");
+        del.disabled = clr.disabled = !on.length; hint.style.visibility = on.length ? "" : "hidden"; hint.textContent = on.length >= MAXF ? "A bouquet can hold up to " + MAXF + " flowers." : on.length + " flower" + (on.length === 1 ? "" : "s");
       }
       function add(L) { if (on.length >= MAXF) return paint(); on.push(L); paint(); }
       del.onclick = function () { on.pop(); paint(); }; clr.onclick = function () { on.length = 0; paint(); };
@@ -207,14 +207,14 @@
   function drawInvoice() {
     const m = counts(), list = $("inv-list"), keys = Object.keys(m);
     list.replaceChildren();
-    if (!keys.length) { list.append(el("li", "inv-empty", "No items added yet"), el("li", "inv-empty", "Start by choosing something from the category.")); }
+    if (!keys.length) { list.append(el("li", "inv-empty", "No items added yet"), el("li", "inv-empty", "Choose an item from a category to begin.")); }
     keys.forEach(function (k) { const li = el("li", "inv-item"); li.append(el("span", "", TYPES[k].name), el("span", "", "x" + m[k])); list.append(li); });
     $("inv-sum").replaceChildren(el("div", "", keys.length + " content types"), el("div", "", state.items.length + " items included"));
     const has = state.items.length > 0, sealed = state.view === "sealed";
     $("btn-review").disabled = !has; $("btn-seal").disabled = !has;
     $("btn-review").classList.toggle("on", state.view === "review"); $("btn-seal").classList.toggle("on", sealed);
     $("inv-clear").hidden = !has || sealed;
-    $("inv-note").textContent = has ? "Once sealed, your package will be ready to share with the recipient." : "At least add one item before reviewing and sealing the package.";
+    $("inv-note").textContent = has ? "Once sealed, your package will be ready to share with the recipient." : "Add at least one item before reviewing and sealing the package.";
   }
   [["f-to", "to"], ["f-by", "by"], ["f-title", "title"]].forEach(function (p) { $(p[0]).addEventListener("input", function (e) { f[p[1]] = e.target.value.trim(); if (state.view === "review") draw(); }); });
   $("inv-clear").addEventListener("click", function () { if (confirm("Remove all items from this package?")) { state.items = []; state.view = "create"; draw(); } });
@@ -224,7 +224,7 @@
     const L = (values.text || LETTER).replace(/\r/g, "").split("\n"), full = L.length >= 4;
     const box = el("div", "ltr"), top = el("input", "ltr-top"), body = el("textarea", "ltr-body"), end = el("textarea", "ltr-end");
     top.type = "text"; top.value = full ? L[0] : "Dear Someone,"; top.setAttribute("aria-label", "Greeting");
-    body.placeholder = "What is this letter about? Write something..."; body.setAttribute("aria-label", "Letter");
+    body.placeholder = "What is this letter about? Write your message here..."; body.setAttribute("aria-label", "Letter");
     body.value = full ? L.slice(1, -2).join("\n").trim() : (values.text || "").trim();
     end.rows = 2; end.value = full ? L.slice(-2).join("\n") : "Kind Regards,\nSomeone Else"; end.setAttribute("aria-label", "Sign-off");
     function grow() { body.style.height = "auto"; body.style.height = Math.min(body.scrollHeight, 180) + "px"; }
@@ -234,7 +234,7 @@
       const b = body.value.trim(); if (!b) return null;
       return { text: top.value.trim() + "\n\n" + b + "\n\n" + end.value.trim().split("\n").slice(0, 2).join("\n") };
     };
-    box.miss = "Write something in your letter first.";
+    box.miss = "Please write your letter first.";
     return box;
   }
   function openForm(typeId, editing) {
@@ -272,7 +272,7 @@
       inp.placeholder = fd[1] || ""; inp.setAttribute("aria-label", fd[1] || "Letter"); inp.value = values[key] || (typeId === "letter" ? LETTER : "");
       if (typeId === "memory" && key === "text") inp.placeholder = "Additional Message (Optional)";
       if ((typeId === "coupon" || typeId === "ticket" || typeId === "clip") && cpRow && (key === "link" || key === "date")) {
-        if (key === "link") { inp.placeholder = typeId === "clip" ? "Paste article link here" : "Paste a link here"; if (typeId === "clip") cpRow.style.marginRight = "7px"; }
+        if (key === "link") { inp.placeholder = typeId === "clip" ? "Paste the article link" : "Paste a link"; if (typeId === "clip") cpRow.style.marginRight = "7px"; }
         else { inp.placeholder = typeId === "ticket" ? "Select date and time" : "Expiry date (Optional)"; if (!inp.value) inp.type = "text"; inp.addEventListener("focus", function () { inp.type = kind; }); inp.addEventListener("blur", function () { if (!inp.value) inp.type = "text"; }); }
         cpRow.append(inp); inputs[key] = inp; return;
       }
@@ -306,7 +306,7 @@
         if (kind === "url" && v && !safeUrl(v)) return void (err.textContent = "Please enter a full link starting with https://");
         if (v) data[key] = v;
       }
-      if (typeId === "letter" && data.text.replace(/Dear Someone,|Kind Regards,|Someone Else/g, "").trim() === "") return void (err.textContent = "Write something in your letter first.");
+      if (typeId === "letter" && data.text.replace(/Dear Someone,|Kind Regards,|Someone Else/g, "").trim() === "") return void (err.textContent = "Please write your letter first.");
       if (!editing && state.items.length >= MAX) return void (err.textContent = "A package can hold up to " + MAX + " items.");
       if (["coupon", "ticket", "clip"].includes(typeId) && !data.file && !data.link) return void (err.textContent = "Add an image or a link.");
       if (editing) editing.data = data; else state.items.push({ id: Math.random().toString(36).slice(2, 9), type: typeId, data: data });
@@ -353,7 +353,7 @@
       else hint.append(el("p", "", "Add at least one item."));
       stage.replaceChildren(panel, hint); return;
     }
-    const head = el("div"); head.append(el("h1", "", "Axia"), el("p", "tag", "You don’t need an account to begin, because some things are worth exploring first."));
+    const head = el("div"); head.append(el("h1", "", "Axia"), el("p", "tag", "You can begin without an account. Create one later to save your packages."));
     stage.replaceChildren(head, panel);
   }
   function snippet(type, list) {
@@ -374,7 +374,7 @@
     const back = el("button", "bt", "‹ Back to create"); back.onclick = function () { state.view = "create"; draw(); };
     box.append(cards); const bk = el("div", "review-back"); bk.append(back);
     if (user) stage.replaceChildren(box, bk);
-    else { const head = el("div"); head.append(el("h1", "", "Axia"), el("p", "tag", "You don’t need an account to begin, because some things are worth exploring first.")); stage.replaceChildren(head, box, bk); }
+    else { const head = el("div"); head.append(el("h1", "", "Axia"), el("p", "tag", "You can begin without an account. Create one later to save your packages.")); stage.replaceChildren(head, box, bk); }
   }
   function seal() {
     const id = Math.random().toString(36).slice(2, 10), pkg = { id: id, title: f.title || "Untitled package", to: f.to, by: f.by, items: state.items, made: Date.now() };
@@ -384,21 +384,21 @@
   }
   function drawSealed() {
     const url = new URL("open.html?p=" + state.pkg.id, location.href).href, box = el("div", "sealed");
-    const mineNow = user && purpose === "me", done = el("a", mineNow ? "bt on" : "bt done", mineNow ? "Yep, Understood!" : "Done"); done.href = user ? (purpose === "me" ? "for-me.html" : "for-someone.html") : "../index.html";
+    const mineNow = user && purpose === "me", done = el("a", mineNow ? "bt on" : "bt done", mineNow ? "Understood" : "Done"); done.href = user ? (purpose === "me" ? "for-me.html" : "for-someone.html") : "../index.html";
     const img = el("img"); img.src = "../assets/images/package/gift-box.png"; img.alt = "A wrapped gift box";
     const copy = el("button", "bt on", "Copy Package Link"); copy.type = "button";
     copy.onclick = function () {
-      const ok = function () { toast("Link copied! Send it to the person you made it for."); };
+      const ok = function () { toast("Link copied. Send it to the person you made this package for."); };
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(ok, function () { window.prompt("Copy this link:", url); });
       else window.prompt("Copy this link:", url);
     };
     const mine = user && purpose === "me";
     if (!mine) box.append(done);
-    box.append(el("p", "", "Package Sealed!"), el("h2", "", state.pkg.title), el("p", "", mine ? "Your package is ready whenever you are" : "Your package is ready to share"), img,
-      el("p", "warn", !user ? "Please copy your package link before closing this page. As a guest, you may not be able to access this package again after leaving." : mine ? "Since you chose to keep it for yourself, this package is accessible anytime from the For Me section." : "Since you chose to send it for someone, this package is accessible anytime from the For Someone section, or you can copy the link and share it to them."));
+    box.append(el("p", "", "Package Sealed!"), el("h2", "", state.pkg.title), el("p", "", mine ? "Your package is ready to keep" : "Your package is ready to share"), img,
+      el("p", "warn", !user ? "Please copy your package link before closing this page. As a guest, you may not be able to access this package again after leaving." : mine ? "Since you chose to keep it for yourself, this package is accessible anytime from the For Me section." : "Since you chose to send it for someone, this package is accessible anytime from the For Someone section, or you can copy the link and share it with them."));
     if (!mine) box.append(copy); else { done.style.display = "inline-block"; done.style.marginTop = "6px"; box.append(done); }
     if (user) stage.replaceChildren(box);
-    else { const head = el("div"); head.append(el("h1", "", "Axia"), el("p", "tag", "You don’t need an account to begin, because some things are worth exploring first.")); stage.replaceChildren(head, box); }
+    else { const head = el("div"); head.append(el("h1", "", "Axia"), el("p", "tag", "You can begin without an account. Create one later to save your packages.")); stage.replaceChildren(head, box); }
   }
   const ws = $("ws"), bar = $("bar");
   function draw() {
