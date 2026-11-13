@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/builder.css">
   <style>.ws-top .pill.back{background:var(--color-card);text-decoration:none}.ws-top .pill{text-decoration:none}</style>
+  <style>
+    .mg-bar{position:absolute;top:-34px;right:1rem;display:flex;gap:8px}
+    .mg-btn{height:26px;padding:0 14px;border:var(--border);border-radius:13px;background:var(--color-card);font:inherit;font-size:.72rem;font-weight:var(--weight-bold);color:var(--color-heading);cursor:pointer}
+    .mg-btn:hover:not(:disabled){filter:brightness(.95)}.mg-btn:disabled{opacity:.45;cursor:not-allowed}
+    .mg-red,.mg-del{color:var(--color-error)}
+    .mg-del{position:absolute;top:10px;right:12px}
+    .mg-check{position:absolute;top:12px;right:14px;width:20px;height:20px;margin:0;accent-color:var(--color-highlight);cursor:pointer}
+  </style>
 </head>
 <body class="workspace" data-page="open" data-root="../">
   <header class="ws-top"><a class="pill" href="../index.html">Axia</a></header>
@@ -20,6 +28,52 @@
   <script src="../js/builder.js"></script>
   <script>
     /* Recipient view: no account needed. Prototype note: packages live in this browser's storage. */
+    /* Owner only: delete one item, or tick several and delete them together.
+       Buttons sit on top of the page (absolute), so nothing else moves. */
+    function manage(pkg, nodes, box) {
+      const mk = function (tag, cls, text) { const e = document.createElement(tag); e.className = cls; if (text) e.textContent = text; if (tag === "button") e.type = "button"; return e; };
+      const backHref = pkg.purpose === "someone" ? "for-someone.html" : "for-me.html";
+      let rows = pkg.items.map(function (it, i) { return { it: it, node: nodes[i], del: mk("button", "mg-btn mg-del", "Delete"), cb: mk("input", "mg-check") }; });
+      let selecting = false, chosen = new Set();
+      const bar = mk("div", "mg-bar"); box.style.position = "relative"; box.append(bar);
+      function save(items) {
+        try {
+          const all = JSON.parse(localStorage.getItem("axia_shared") || "{}");
+          if (items.length) all[pkg.id] = Object.assign({}, pkg, { items: items }); else delete all[pkg.id];
+          localStorage.setItem("axia_shared", JSON.stringify(all)); return true;
+        } catch (e) { return false; }
+      }
+      function remove(list) {
+        const n = list.length, last = n === rows.length;
+        const msg = (n > 1 ? "Delete these " + n + " items?" : "Delete this item?") + (last ? " This is everything in the package, so the package will be deleted too." : "") + " This cannot be undone.";
+        if (!confirm(msg)) return;
+        const keep = rows.filter(function (r) { return list.indexOf(r) < 0; });
+        if (!save(keep.map(function (r) { return r.it; }))) return Axia.toast("We couldn’t delete that. Please try again.");
+        if (!keep.length) { location.href = backHref; return; }
+        list.forEach(function (r) { r.node.remove(); }); rows = keep; pkg.items = keep.map(function (r) { return r.it; });
+        selecting = false; chosen.clear(); draw(); Axia.toast(n > 1 ? n + " items deleted." : "Item deleted.");
+      }
+      function draw() {
+        bar.replaceChildren();
+        if (!selecting) { const s = mk("button", "mg-btn", "Select"); s.onclick = function () { selecting = true; chosen.clear(); draw(); }; bar.append(s); }
+        else {
+          const all = mk("button", "mg-btn", chosen.size === rows.length ? "Clear selection" : "Select all"), del = mk("button", "mg-btn mg-red", chosen.size ? "Delete selected (" + chosen.size + ")" : "Delete selected"), cancel = mk("button", "mg-btn", "Cancel");
+          del.disabled = !chosen.size;
+          all.onclick = function () { const every = chosen.size === rows.length; chosen.clear(); if (!every) rows.forEach(function (r) { chosen.add(r); }); draw(); };
+          del.onclick = function () { remove(Array.from(chosen)); };
+          cancel.onclick = function () { selecting = false; chosen.clear(); draw(); };
+          bar.append(all, del, cancel);
+        }
+        rows.forEach(function (r) {
+          r.node.style.position = "relative"; r.del.hidden = selecting; r.cb.hidden = !selecting; r.cb.type = "checkbox"; r.cb.checked = chosen.has(r);
+          r.del.setAttribute("aria-label", "Delete this item"); r.cb.setAttribute("aria-label", "Select this item");
+          r.del.onclick = function () { remove([r]); };
+          r.cb.onchange = function () { if (r.cb.checked) chosen.add(r); else chosen.delete(r); draw(); };
+          if (!r.del.parentNode) r.node.append(r.del, r.cb);
+        });
+      }
+      draw();
+    }
     (function () {
       const box = document.getElementById("viewer"), id = new URLSearchParams(location.search).get("p");
       let pkg = null;
@@ -41,9 +95,10 @@
       const p = document.createElement("p");
       p.textContent = "A package prepared for " + (pkg.to || "you") + (pkg.by ? " by " + pkg.by : "") + ".";
       box.append(p);
-      pkg.items.forEach(function (it) { box.append(Axia.render(it)); });
+      const nodes = pkg.items.map(function (it) { const n = Axia.render(it); box.append(n); return n; });
       const end = document.createElement("p"); end.style.textAlign = "center";
       end.textContent = "You’ve reached the end of this package."; box.append(end);
+      if (me && pkg.owner === me.email) manage(pkg, nodes, box);      // only the owner can delete items
     })();
   </script>
 </body>
